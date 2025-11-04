@@ -38,7 +38,7 @@ return new class extends Migration
     {
         //remover relacionamento com tb_produto_detalhes
         Schema::table('produto_detalhes', function(Blueprint $table){
-            $table->dropForeign('produto_detalhes_unidade_id_foreign'); //remove a fk
+            $table->dropForeign('produtos_unidade_id_foreign'); //remove a fk
             $table->dropColumn('unidade_id'); //remove a coluna           
         }); 
         
