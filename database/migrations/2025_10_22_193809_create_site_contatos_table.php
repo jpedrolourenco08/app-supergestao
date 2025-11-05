@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('site_contatos', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('name', length: 50);
+            $table->string('nome', length: 50);
             $table->string('telefone', length: 20);
             $table->string('email', length: 80);
             $table->integer('motivo_contato');
