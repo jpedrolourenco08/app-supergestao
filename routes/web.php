@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Middleware\LogAcessoMiddleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\FornecedorController;
+use App\Http\Middleware;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,11 +13,17 @@ use App\Http\Controllers\FornecedorController;
 */
 
 //namespace\Classe::class, 'método'
-Route::get('/',[\App\Http\Controllers\PrincipalController::class,'principal'])->name('site.index'); 
-Route::get('/sobre-nos',[\App\Http\Controllers\SobreNosController::class,'sobreNos'])->name('site.sobre-nos');
-Route::get('/contato',[\App\Http\Controllers\ContatoController::class,'contato'])->name('site.contato');
-Route::post('/contato',[\App\Http\Controllers\ContatoController::class,'salvar'])->name('site.contato.salvar');
-Route::get('/login', function(){return "Login";})->name('site.login');
+Route::get('/',[\App\Http\Controllers\PrincipalController::class,'principal'])
+  ->name('site.index')
+  ->middleware(LogAcessoMiddleware::class); 
+Route::get('/sobre-nos',[\App\Http\Controllers\SobreNosController::class,'sobreNos'])
+  ->name('site.sobre-nos');
+Route::get('/contato',[\App\Http\Controllers\ContatoController::class,'contato'])
+  ->name('site.contato');
+Route::post('/contato',[\App\Http\Controllers\ContatoController::class,'salvar'])
+  ->name('site.contato.salvar');
+Route::get('/login', function(){return "Login";})
+  ->name('site.login');
 
 Route::prefix('/app')->  group(function(){
   Route::get('/clientes',function(){return "Clientes";})->name('app.clientes');
