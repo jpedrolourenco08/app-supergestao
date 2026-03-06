@@ -4,7 +4,7 @@ use App\Http\Middleware\LogAcessoMiddleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\FornecedorController;
-use App\Http\Middleware;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,7 +15,7 @@ use App\Http\Middleware;
 //namespace\Classe::class, 'método'
 Route::get('/',[\App\Http\Controllers\PrincipalController::class,'principal'])
   ->name('site.index')
-  ->middleware(LogAcessoMiddleware::class); 
+  ->middleware('log.acesso');
 Route::get('/sobre-nos',[\App\Http\Controllers\SobreNosController::class,'sobreNos'])
   ->name('site.sobre-nos');
 Route::get('/contato',[\App\Http\Controllers\ContatoController::class,'contato'])
