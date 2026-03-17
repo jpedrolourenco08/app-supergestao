@@ -16,22 +16,29 @@ use App\Http\Controllers\FornecedorController;
 Route::get('/',[\App\Http\Controllers\PrincipalController::class,'principal'])
   ->name('site.index')
   ->middleware('log.acesso');
+
 Route::get('/sobre-nos',[\App\Http\Controllers\SobreNosController::class,'sobreNos'])
   ->name('site.sobre-nos');
+
 Route::get('/contato',[\App\Http\Controllers\ContatoController::class,'contato'])
   ->name('site.contato');
+
 Route::post('/contato',[\App\Http\Controllers\ContatoController::class,'salvar'])
   ->name('site.contato.salvar');
-Route::get('/login', [\App\Http\Controllers\LoginController::class, 'index'])
+
+Route::get('/login/{erro?}', [\App\Http\Controllers\LoginController::class, 'index'])
   ->name('site.login');
+
   Route::post('/login', [\App\Http\Controllers\LoginController::class, 'autenticar'])
   ->name('site.login');
 
 Route::middleware('autenticacao:padrao')->prefix('/app')->group(function(){
   Route::get('/clientes',function(){return "Clientes";})
     ->name('app.clientes');
+
   Route::get('/fornecedores', [FornecedorController::class, 'index'])
     ->name('app.fornecedores');
+
   Route::get('/produtos', function(){return "Produtos";})
     ->name('app.produtos');
 });
